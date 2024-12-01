@@ -58,8 +58,7 @@ class MCFU_net(nn.Module):
         c8 = self.conv8(up_8)
         up_9 = self.up9(self.CLFM3(c2, c3, c4, c5) + c8)
         c9 = self.conv9(up_9)
-        c10 = self.conv10(c9)
-        out = nn.Sigmoid()(c10)
+        out = self.conv10(c9)
         return out
 
 
