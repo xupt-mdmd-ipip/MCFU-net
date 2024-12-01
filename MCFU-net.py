@@ -260,14 +260,14 @@ class SeparableConv2d_fusion(nn.Module):
 
         self.conv1 = nn.Conv2d(in_channels, in_channels, kernel_size, stride, padding, dilation, groups=in_channels,
                                bias=bias)
-        self.bn = BatchNorm(in_channels)
+        self.bn1 = BatchNorm(in_channels)
         self.pointwise = nn.Conv2d(in_channels, out_channels, 1, 1, 0, 1, 1, bias=bias)
         self.bn2 = BatchNorm(out_channels)
         self.nonlinearity = nn.ReLU(inplace=True)
 
     def forward(self, x):
         x = self.conv1(x)
-        x = self.bn(x)
+        x = self.bn1(x)
         x = self.pointwise(x)
         x = self.bn2(x)
         x = self.nonlinearity(x)
